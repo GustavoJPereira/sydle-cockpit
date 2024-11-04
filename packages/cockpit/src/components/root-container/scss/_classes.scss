@@ -1,0 +1,19 @@
+@include component-reboot;
+
+:host {
+  display: flex;
+  width: 90%;
+  height: 90%;
+  padding: 10px;
+  color: #2F2F2F;
+  background-color: #FFF;
+  border-radius: 8px;
+}
+
+div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+

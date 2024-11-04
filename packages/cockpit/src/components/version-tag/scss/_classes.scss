@@ -1,0 +1,11 @@
+@include component-reboot;
+
+:host {
+  display: block;
+  height: 30px;
+  padding: 2px 16px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #1E1E1E;
+  border-radius: 16px;
+}
