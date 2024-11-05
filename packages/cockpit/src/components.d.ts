@@ -18,6 +18,7 @@ export namespace Components {
       status: string;
     }[];
   };
+        "firstEnv": boolean | null;
     }
     interface SyCockpitEnvironmentsTable {
     }
@@ -80,6 +81,7 @@ declare namespace LocalJSX {
       status: string;
     }[];
   };
+        "firstEnv"?: boolean | null;
     }
     interface SyCockpitEnvironmentsTable {
     }

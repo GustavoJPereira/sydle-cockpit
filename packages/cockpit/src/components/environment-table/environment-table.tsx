@@ -19,7 +19,8 @@ export class EnvironmentTable {
       status: string;
     }[];
   };
-  // @Prop() teste: string;
+
+  @Prop() firstEnv: boolean | null;
 
   render() {
     return (
@@ -30,14 +31,14 @@ export class EnvironmentTable {
         </div>
         <table>
           <tr>
-            <th>Nome</th>
-            <th>Pacote</th>
+            {this.firstEnv ? <th>Nome</th> : null}
+            {this.firstEnv ? <th>Pacote</th> : null}
             <th>Versão</th>
           </tr>
           {this.environmentData.dependenciasInstaladas.map(dependencia => 
              <tr key={dependencia.pacote}>
-              <td>{dependencia.nome}</td>
-              <td>{dependencia.pacote}</td>
+              {this.firstEnv ? <td>{dependencia.nome}</td> : null}
+              {this.firstEnv ? <td>{dependencia.pacote}</td> : null}
               <td>{dependencia.versao}</td>
             </tr>
           )}

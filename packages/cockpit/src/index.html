@@ -35,9 +35,32 @@
 
     <script type="module" src="build/cockpit.esm.js"></script>
     <script nomodule src="build/cockpit.js"></script>
+    <script>
+      window.sydleApp = window.sydleApp ?? {};
+      window.sydleApp.config = window.sydleApp.config ?? {};
+      window.sydleApp.config['ui-api'] = {
+        ORGANIZATION_IDENTIFIER: 'elogroup-dev',
+        BASE_API_URL: 'https://elogroup-dev.sydle.one/api/1/',
+        APPLICATION_IDENTIFIER: 'gestao-de-dependencias',
+        REQUEST_PARAMS: {
+          headers: {
+            Authorization: "Bearer eyJjdHkiOiJKV1QiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiZGlyIn0..1H66xcMxhx1s5T2k4Wy5UA.g4bSisRpEujkSAS2ME5vevNsq8-7IXVqENdwHIgpZ1rjm6i2EUbnF9dLBlleIQvtjgCVIXOjoQEJFeYu4Pn_5Uvp-JG4eP7rR_aElbElgvYi4dAUzjldNFCi9fedy2vl032jkqa2ImCs-Mg2ea0Ck8IeFKuaUcIECoalel1j4vjfWtJ3k-dQxL4itfAwxucsHubmmvAIIjYEGJTXGJhy0wDUyz7jY2dqZ17vBTPFwJ_vabOtk3reUQ5lSHgMpWjS0d4N4vIuDAJyuSjcofPNj8WhQOUuluJmJzTenQjWmGfuoqqZBf8x2iRBSmTnqjtVUl8KHIGthrjzKY5BzzqXbaOZuqX1YXuNmAF9MGfNRMc0CY4kho8d9UzRBRcI65nC1WQFi5jxPhCqo_1fl-aHmdJjedJ8Ps6SMH3EY3TPALQOyi-aq5_on4dMMJV4iNXN4h_DucTu_zczMNgz_2rjw99yCVaPYOfMeprrs3_AsGpawX_BHk74yzQCcM7PL3gcsqlYsDIggX_VUmthb-ZYeQ3Ey9ps6jj3yg8YdT8HUlToP9Cfs4QsuZaobyJArIHJgDfl5AfL5iE_H5yTpngyDixMcg0BZGRlHEvATAB3hvHzBBgv3DX28b6_mCo96LcuTXyFm-3RycCSVEHSKCSIvg.pYx4ocpH_cPqRd9yXiiBLQ"
+          },
+        },
+      };
+    </script>
   </head>
 
-  <body style="background-color: #1E1E1E; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
+  <body
+    style="
+      background-color: #1e1e1e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    "
+  >
     <sy-cockpit-root-container></sy-cockpit-root-container>
   </body>
 </html>

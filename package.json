@@ -8,6 +8,7 @@
     "packages/*"
   ],
   "devDependencies": {
+    "@sydle/ui-api": "^1.13.6",
     "@sydle/ui-nx-plugin": "^2.0.0",
     "nx": "^18.3.5",
     "prettier": "^3.0.3"
