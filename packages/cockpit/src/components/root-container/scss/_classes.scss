@@ -2,11 +2,13 @@
 
 :host {
   display: flex;
+  flex-direction: column;
   width: 90%;
   height: 90%;
   padding: 10px;
-  color: #2F2F2F;
-  background-color: #FFF;
+  overflow: scroll;
+  color: #2f2f2f;
+  background-color: #fff;
   border-radius: 8px;
 }
 
@@ -15,5 +17,6 @@ div {
   align-items: center;
   justify-content: center;
   width: 100%;
+  min-height: 800px;
+  margin: 10px 0;
 }
-

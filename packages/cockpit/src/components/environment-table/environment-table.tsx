@@ -29,7 +29,7 @@ export class EnvironmentTable {
           <p>{this.environmentData.nome}</p>
           <sy-cockpit-version-tag>{this.environmentData.versao}</sy-cockpit-version-tag>
         </div>
-        <table>
+        <sy-cockpit-default-table>
           <tr>
             {this.firstEnv ? <th>Nome</th> : null}
             {this.firstEnv ? <th>Pacote</th> : null}
@@ -42,7 +42,7 @@ export class EnvironmentTable {
               <td>{dependencia.versao}</td>
             </tr>
           )}
-        </table>
+        </sy-cockpit-default-table>
       </Host>
     );
   }

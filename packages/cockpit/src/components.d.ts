@@ -6,6 +6,8 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface SyCockpitDefaultTable {
+    }
     interface SyCockpitEnvironmentTable {
         "environmentData": {
     nome: string;
@@ -20,6 +22,8 @@ export namespace Components {
   };
         "firstEnv": boolean | null;
     }
+    interface SyCockpitEnvironmentUpdater {
+    }
     interface SyCockpitEnvironmentsTable {
     }
     interface SyCockpitExample {
@@ -27,14 +31,27 @@ export namespace Components {
     interface SyCockpitRootContainer {
     }
     interface SyCockpitVersionTag {
+        "color": string;
     }
 }
 declare global {
+    interface HTMLSyCockpitDefaultTableElement extends Components.SyCockpitDefaultTable, HTMLStencilElement {
+    }
+    var HTMLSyCockpitDefaultTableElement: {
+        prototype: HTMLSyCockpitDefaultTableElement;
+        new (): HTMLSyCockpitDefaultTableElement;
+    };
     interface HTMLSyCockpitEnvironmentTableElement extends Components.SyCockpitEnvironmentTable, HTMLStencilElement {
     }
     var HTMLSyCockpitEnvironmentTableElement: {
         prototype: HTMLSyCockpitEnvironmentTableElement;
         new (): HTMLSyCockpitEnvironmentTableElement;
+    };
+    interface HTMLSyCockpitEnvironmentUpdaterElement extends Components.SyCockpitEnvironmentUpdater, HTMLStencilElement {
+    }
+    var HTMLSyCockpitEnvironmentUpdaterElement: {
+        prototype: HTMLSyCockpitEnvironmentUpdaterElement;
+        new (): HTMLSyCockpitEnvironmentUpdaterElement;
     };
     interface HTMLSyCockpitEnvironmentsTableElement extends Components.SyCockpitEnvironmentsTable, HTMLStencilElement {
     }
@@ -61,7 +78,9 @@ declare global {
         new (): HTMLSyCockpitVersionTagElement;
     };
     interface HTMLElementTagNameMap {
+        "sy-cockpit-default-table": HTMLSyCockpitDefaultTableElement;
         "sy-cockpit-environment-table": HTMLSyCockpitEnvironmentTableElement;
+        "sy-cockpit-environment-updater": HTMLSyCockpitEnvironmentUpdaterElement;
         "sy-cockpit-environments-table": HTMLSyCockpitEnvironmentsTableElement;
         "sy-cockpit-example": HTMLSyCockpitExampleElement;
         "sy-cockpit-root-container": HTMLSyCockpitRootContainerElement;
@@ -69,6 +88,8 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    interface SyCockpitDefaultTable {
+    }
     interface SyCockpitEnvironmentTable {
         "environmentData"?: {
     nome: string;
@@ -83,6 +104,8 @@ declare namespace LocalJSX {
   };
         "firstEnv"?: boolean | null;
     }
+    interface SyCockpitEnvironmentUpdater {
+    }
     interface SyCockpitEnvironmentsTable {
     }
     interface SyCockpitExample {
@@ -90,9 +113,12 @@ declare namespace LocalJSX {
     interface SyCockpitRootContainer {
     }
     interface SyCockpitVersionTag {
+        "color"?: string;
     }
     interface IntrinsicElements {
+        "sy-cockpit-default-table": SyCockpitDefaultTable;
         "sy-cockpit-environment-table": SyCockpitEnvironmentTable;
+        "sy-cockpit-environment-updater": SyCockpitEnvironmentUpdater;
         "sy-cockpit-environments-table": SyCockpitEnvironmentsTable;
         "sy-cockpit-example": SyCockpitExample;
         "sy-cockpit-root-container": SyCockpitRootContainer;
@@ -103,7 +129,9 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "sy-cockpit-default-table": LocalJSX.SyCockpitDefaultTable & JSXBase.HTMLAttributes<HTMLSyCockpitDefaultTableElement>;
             "sy-cockpit-environment-table": LocalJSX.SyCockpitEnvironmentTable & JSXBase.HTMLAttributes<HTMLSyCockpitEnvironmentTableElement>;
+            "sy-cockpit-environment-updater": LocalJSX.SyCockpitEnvironmentUpdater & JSXBase.HTMLAttributes<HTMLSyCockpitEnvironmentUpdaterElement>;
             "sy-cockpit-environments-table": LocalJSX.SyCockpitEnvironmentsTable & JSXBase.HTMLAttributes<HTMLSyCockpitEnvironmentsTableElement>;
             "sy-cockpit-example": LocalJSX.SyCockpitExample & JSXBase.HTMLAttributes<HTMLSyCockpitExampleElement>;
             "sy-cockpit-root-container": LocalJSX.SyCockpitRootContainer & JSXBase.HTMLAttributes<HTMLSyCockpitRootContainerElement>;

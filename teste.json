@@ -1,1 +1,21 @@
-{ "nome": "string" versao: string; dependenciasInstaladas: { nome: string; versao: string; pacote: string; atualizacaoDisponivel: null; status: string; }[]; }' is not assignable to type '{ nome: string; versao: string; dependenciasInstaladas: { nome: string; versao: string; pacote: string; atualizacaoDisponivel: boolean; status: string; }[]; }'.Types of property 'dependenciasInstaladas' are incompatible.Type '{ nome: string; versao: string; pacote: string; atualizacaoDisponivel: null; status: string; }[]' is not assignable to type '{ nome: string; versao: string; pacote: string; atualizacaoDisponivel: boolean; status: string; }[]'.Type '{ nome: string; versao: string; pacote: string; atualizacaoDisponivel: null; status: string; }' is not assignable to type '{ nome: string; versao: string; pacote: string; atualizacaoDisponivel: boolean; status: string; }'.Types of property 'atualizacaoDisponivel' are incompatible.Type 'null' is not assignable to type 'boolean'.
+{
+    "dependenceInAllEnvironments": [
+        {
+            "name": "Sincronização de dados",
+            "package": "sincronizaçãodedados",
+            "lastVersion": "1.0.1",
+            "environments": [
+                {
+                    "name": "EloGroup - DEV",
+                    "version": "1.0.1",
+                    "status": "UPDATED"
+                },
+                {
+                    "name": "TCE CE - DEV",
+                    "version": "1.0.0",
+                    "status": "UPDATABLE"
+                }
+            ]
+        }
+    ]
+}

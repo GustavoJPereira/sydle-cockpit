@@ -9,6 +9,10 @@ export class RootContainer {
   render() {
     return (
       <Host>
+        <div>
+          <sy-cockpit-environment-updater>
+          </sy-cockpit-environment-updater>
+        </div>
         <div><sy-cockpit-environments-table></sy-cockpit-environments-table></div>
       </Host>
     );

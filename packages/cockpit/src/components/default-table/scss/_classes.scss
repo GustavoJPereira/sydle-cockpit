@@ -1,0 +1,40 @@
+@include component-reboot;
+
+sy-cockpit-default-table {
+  display: block;
+  width: 100%;
+}
+
+
+table,
+td,
+th {
+  width: auto;
+  text-align: left;
+  border-collapse: collapse;
+  border: 1px solid #e7e7e7;
+}
+
+sy-cockpit-default-table>table {
+  width: 100%;
+}
+
+
+th,
+td {
+  padding: 10px;
+}
+
+tr {
+  width: 100%;
+}
+
+th {  
+  font-size: 18px;
+  font-weight: 500;
+}
+
+tr:nth-child(odd) {
+  background-color: #f4f4f4;
+}
+

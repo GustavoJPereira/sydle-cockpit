@@ -15,7 +15,8 @@
     "clean": "rimraf www loader dist .stencil",
     "dev": "stencil build --dev --watch --serve",
     "lint": "eslint --ignore-path ../../.gitignore .",
-    "stylelint": "stylelint --ignore-path ../../.gitignore '**/*.{css,scss}'"
+    "stylelint": "stylelint --ignore-path ../../.gitignore '**/*.{css,scss}'",
+    "criar-zip": "cd www/ && tar.exe -a -c -f bundle.zip build"
   },
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
