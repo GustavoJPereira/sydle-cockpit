@@ -1,4 +1,4 @@
-import { Component, h, Host, State } from '@stencil/core';
+import { Component, Element, h, Host, State } from '@stencil/core';
 
 @Component({
   tag: 'sy-cockpit-environment-updater',
@@ -6,7 +6,7 @@ import { Component, h, Host, State } from '@stencil/core';
   shadow: true,
 })
 export class EnvironmentUpdater {
-  // @Prop() const
+  // @Prop() //esses dados virão de fora mais tarde
   @State()
   environmentsData: any[] = [
     {
@@ -430,7 +430,7 @@ export class EnvironmentUpdater {
   ];
 
   @State()
-  dependencesInAllEnvironments: any[] = [
+  dependencesAndAnbienceTable: any[] = [
     {
       name: 'Sincronização de dados',
       package: 'sincronizaçãodedados',
@@ -457,11 +457,157 @@ export class EnvironmentUpdater {
     NOT_INSTALLED: 'instalar',
   };
 
+  @Element() element: HTMLElement;
+
+  environmentSelect: any;
+  packagesSelect: any;
+  actionsSelect: any;
+
+  filterDependencesAndAnbienceTable(
+    environments: any[],
+    packages: any[],
+    actions: any[],
+    environmentsData: any[],
+  ): { package: string; lastVersion: string; environments: any[] }[] {
+    console.log(environments, packages, actions, environmentsData);
+    let dependencesAndAnbienceTable = packages.map(
+      (dependence): { package: string; lastVersion: string; environments: any } => {
+        return {
+          package: dependence,
+          lastVersion: '3.0.0',
+          environments: [],
+        };
+      },
+    );
+
+    dependencesAndAnbienceTable = dependencesAndAnbienceTable.map((dependenceAndAnbienceTable) => {
+      dependenceAndAnbienceTable.environments = environmentsData.map((environment) => {
+        const packageInEnvironment: any = environment.dependenciasInstaladas.find(
+          (dep: any) => dep.versao != 'Não Instalado' && dep.pacote == dependenceAndAnbienceTable.package,
+        );
+
+        if (packageInEnvironment) {
+          const versionDiff: string =
+            packageInEnvironment.versao !== 'Não Instalado' &&
+            this.versionIsEqualOrGreater(dependenceAndAnbienceTable.lastVersion, packageInEnvironment.versao)
+              ? 'UPDATABLE'
+              : 'UPDATED';
+
+          return {
+            name: environment.nome,
+            version: packageInEnvironment.versao,
+            status: versionDiff,
+          };
+        } else {
+          return {
+            name: environment.nome,
+            version: 'NOT_INSTALLED',
+            status: 'NOT_INSTALLED',
+          };
+        }
+      });
+
+      return dependenceAndAnbienceTable;
+    });
+
+    return dependencesAndAnbienceTable;
+    // return [
+    // {
+    //   name: 'Sincronização de dados',
+    //   package: 'sincronizaçãodedados',
+    //   lastVersion: '1.0.1',
+    //   environments: [
+    //     {
+    //       name: 'EloGroup - DEV',
+    //       version: '1.0.1',
+    //       status: 'UPDATED',
+    //     },
+    //     {
+    //       name: 'TCE CE - DEV',
+    //       version: '1.0.0',
+    //       status: 'UPDATABLE',
+    //     },
+    //   ],
+    // },
+    // ];
+  }
+  // filterDependencesAndAnbienceTable(environments, packages, actions) : any {
+  // environmentsFiltered = ;
+  // }
+
+  async updateTable(select: any): Promise<void> {
+    select.addEventListener('sySelectDidChange', async () => {
+      let environmentsSelected: any[] = [];
+      let packagesSelected: any[] = [];
+      let actionsSelected: any[] = [];
+      await this.environmentSelect.getTomSelectInstance().then((response: any) => {
+        environmentsSelected = response.items;
+      });
+
+      await this.packagesSelect.getTomSelectInstance().then((response: any) => {
+        packagesSelected = response.items;
+      });
+
+      await this.actionsSelect.getTomSelectInstance().then((response: any) => {
+        actionsSelected = response.items;
+      });
+
+      this.dependencesAndAnbienceTable = this.filterDependencesAndAnbienceTable(
+        environmentsSelected,
+        packagesSelected,
+        actionsSelected,
+        this.environmentsData,
+      );
+    });
+  }
+
+  componentDidLoad() {
+    this.environmentSelect ? this.updateTable(this.environmentSelect) : null;
+
+    this.packagesSelect ? this.updateTable(this.packagesSelect) : null;
+
+    this.actionsSelect ? this.updateTable(this.actionsSelect) : null;
+  }
+
+  versionIsEqualOrGreater(version1: string, version2: string): boolean {
+    const version1Decomposed = version1.split('.');
+    const version2Decomposed = version2.split('.');
+
+    if (version1Decomposed[0] > version2Decomposed[0]) {
+      return true;
+    }
+    if (version1Decomposed[1] > version2Decomposed[1]) {
+      return true;
+    }
+    if (version1Decomposed[2] > version2Decomposed[2]) {
+      return true;
+    }
+
+    if (version1Decomposed[2] == version2Decomposed[2]) return true;
+
+    return false;
+  }
+
   render() {
+    (async () => {
+      await customElements.whenDefined('sy-select');
+      const divSySelect = this.element.shadowRoot?.querySelector('div') as HTMLElement;
+      this.environmentSelect = divSySelect.childNodes[0];
+      this.packagesSelect = divSySelect.childNodes[1];
+      this.actionsSelect = divSySelect.childNodes[2];
+    })();
+
     return (
       <Host>
         <div>
-          <sy-select label="Ambientes" enable-select-all="true" enable-search="true" multiple="true">
+          <sy-select
+            label="Ambientes"
+            enable-select-all="true"
+            enable-search="true"
+            multiple="true"
+            class="teste"
+            sySelectDidChange={(el: any) => console.log(el)}
+          >
             {this.environmentsData.map((environmentData) => (
               <option key={environmentData.nome} value={environmentData.nome}>
                 {environmentData.nome}
@@ -471,7 +617,7 @@ export class EnvironmentUpdater {
           <sy-select label="Pacotes" enable-select-all="true" enable-search="true" multiple="true">
             {this.environmentsData?.[0].dependenciasInstaladas
               ? this.environmentsData[0].dependenciasInstaladas.map((dep: any) => (
-                  <option key={dep.nome} value={dep.nome}>
+                  <option key={dep.pacote} value={dep.pacote}>
                     {dep.nome}
                   </option>
                 ))
@@ -479,8 +625,8 @@ export class EnvironmentUpdater {
             <option value="sydle-ui">sydle-ui</option>
           </sy-select>
           <sy-select label="Ações" enable-search="true" multiple="true">
-            <option value="update">Atualizar</option>
-            <option value="install">Instalar</option>
+            <option value="UPDATE">Atualizar</option>
+            <option value="INSTALL">Instalar</option>
           </sy-select>
         </div>
 
@@ -488,20 +634,19 @@ export class EnvironmentUpdater {
           <tr>
             <th>Pacote</th>
             <th>Versão a Instalar</th>
-            {this.dependencesInAllEnvironments?.[0]
-              ? this.dependencesInAllEnvironments[0].environments.map(
+            {this.dependencesAndAnbienceTable?.[0]
+              ? this.dependencesAndAnbienceTable[0].environments.map(
                   (environment: { name: string | number | undefined }) => (
                     <th key={environment.name}>{environment.name}</th>
                   ),
                 )
               : null}
           </tr>
-          {this.dependencesInAllEnvironments?.[0]
-            ? this.dependencesInAllEnvironments.map((dependenceInAllEnvironments) => (
+          {this.dependencesAndAnbienceTable?.[0]
+            ? this.dependencesAndAnbienceTable.map((dependenceInAllEnvironments) => (
                 <tr key={dependenceInAllEnvironments.package}>
                   <td>{dependenceInAllEnvironments.package}</td>
                   <td>{dependenceInAllEnvironments.lastVersion}</td>
-                  {console.log(dependenceInAllEnvironments.environments)}
                   {dependenceInAllEnvironments.environments.map((evironment: { status: string; name: string }) => (
                     <td key={evironment.name}>
                       <sy-cockpit-version-tag>

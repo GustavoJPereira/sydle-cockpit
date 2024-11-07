@@ -3,6 +3,7 @@
 sy-cockpit-default-table {
   display: block;
   width: 100%;
+  overflow: scroll;
 }
 
 
@@ -30,7 +31,6 @@ tr {
 }
 
 th {  
-  font-size: 18px;
   font-weight: 500;
 }
 
